@@ -28,6 +28,7 @@ public class FrontServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+<<<<<<< Updated upstream
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
@@ -38,6 +39,45 @@ public class FrontServlet extends HttpServlet {
         for (String test : chemin) {
             out.println(test);
             }
+=======
+    
+    @Override
+    public void init()throws ServletException {
+        try {
+            String url = FrontServlet.class.getClassLoader().getResource("").getPath();
+          
+            File fichier = new File(url);
+            File[] filePackage = fichier.listFiles();
+            for (File packageFile : filePackage) {
+               
+                if(packageFile.isDirectory()){
+                    List<Class> listclass = Utilitaire.getAllClasses(url+packageFile.getName(), packageFile.getName());
+                    for (Class allclasses : listclass) {
+                       Method[] fonction = allclasses.getMethods(); // get all method in a classes
+                        for (Method method : fonction) {
+                            if (method.isAnnotationPresent(ClassAnnotation.class)) {
+                                ClassAnnotation annotation = method.getAnnotation(ClassAnnotation.class);
+                                String valueMethod = annotation.methodName();
+                                Mapping map = new Mapping(url, valueMethod);
+                                this.mappingclass.put(annotation.methodName(), map);
+                            }
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+        String path = request.getContextPath();
+        for (Map.Entry<String, Mapping> entry : mappingclass.entrySet()) {
+            out.println("Valeur map :"+entry.getKey());
+>>>>>>> Stashed changes
         }
         
     
