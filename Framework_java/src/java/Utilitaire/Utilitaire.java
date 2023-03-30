@@ -42,8 +42,11 @@ public class Utilitaire {
                         System.out.println("namePackage:" + NamePackage);
                         if (!pathPackage.substring(pathPackage.lastIndexOf("/")+1).equals(NamePackage)) { 
                             name = pathPackage.substring(pathPackage.indexOf(NamePackage)); // take the name of classe
+<<<<<<< Updated upstream
 //                            name = NamePackage.substring(pathPackage.)
                             System.out.println("NewName: "+name);
+=======
+>>>>>>> Stashed changes
                             name = name.replace("/", "."); 
                             System.out.println("allFile + "+allFile.getName());
 
