@@ -5,20 +5,29 @@
  */
 package ETU1905.framework.servlet;
 
+import ETU1905.framework.ClassAnnotation;
+import ETU1905.framework.Mapping;
+import Utilitaire.Utilitaire;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.File;
 import static java.lang.System.out;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Mirado
  */
 public class FrontServlet extends HttpServlet {
-
+    HashMap<String, Mapping> mappingclass = new HashMap<>();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -28,28 +37,14 @@ public class FrontServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-<<<<<<< Updated upstream
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=UTF-8");
-        String path = request.getContextPath();
-        out.println(path);
-        String[] chemin = Utilitaire.Utilitaire.SplitUrl(path);
-        for (String test : chemin) {
-            out.println(test);
-            }
-=======
     
     @Override
     public void init()throws ServletException {
         try {
             String url = FrontServlet.class.getClassLoader().getResource("").getPath();
-          
             File fichier = new File(url);
             File[] filePackage = fichier.listFiles();
             for (File packageFile : filePackage) {
-               
                 if(packageFile.isDirectory()){
                     List<Class> listclass = Utilitaire.getAllClasses(url+packageFile.getName(), packageFile.getName());
                     for (Class allclasses : listclass) {
@@ -65,6 +60,7 @@ public class FrontServlet extends HttpServlet {
                     }
                 }
             }
+                           System.out.println("nety le mapping");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,9 +72,14 @@ public class FrontServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String path = request.getContextPath();
         for (Map.Entry<String, Mapping> entry : mappingclass.entrySet()) {
-            out.println("Valeur map :"+entry.getKey());
->>>>>>> Stashed changes
+            out.println("Valeur map :"+entry.getValue());
         }
+//        out.print(this.mappingclass.get("number").getMethod());
+//        String[] chemin = Utilitaire.SplitUrl(path);
+//        for (String test : chemin) {
+//            out.println(test);
+//        }
+    }
         
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
