@@ -39,6 +39,7 @@ public class Utilitaire {
                             name = pathPackage.substring(pathPackage.indexOf(NamePackage)); // take the name of classe
                             name = name.replace("/", "."); 
                         }
+                     
                         Class kilasy = Class.forName(name+"."+allFile.getName().substring(0, allFile.getName().lastIndexOf(".class")));// package.classeName
                         valiny.add(kilasy);
                     }    

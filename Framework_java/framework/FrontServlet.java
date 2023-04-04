@@ -72,7 +72,7 @@ public class FrontServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String path = request.getContextPath();
         for (Map.Entry<String, Mapping> entry : mappingclass.entrySet()) {
-            out.println("Valeur map :"+entry.getValue());
+            out.println("Valeur map :"+entry.getKey());
         }
 //        out.print(this.mappingclass.get("number").getMethod());
 //        String[] chemin = Utilitaire.SplitUrl(path);
